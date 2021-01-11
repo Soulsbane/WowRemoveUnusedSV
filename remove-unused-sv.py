@@ -8,7 +8,8 @@ import re
 
 if os.name == "posix":
     # OS X
-    WOW_PATH = "/home/soulsbane/bin/WoW/World of Warcraft/_retail_"
+    WOW_PATH = "/run/media/soulsbane/Games/Games/WoW/World of Warcraft/_retail_"
+    #WOW_PATH = "/home/soulsbane/bin/WoW/World of Warcraft/_retail_"
     # WOW_PATH = "/home/soulsbane/.wine/drive_c/Program Files (x86)/World of Warcraft Beta"
 elif (os.name == "win") or (os.name == "nt"):
     WOW_PATH = r"E:\World of Warcraft\\"
@@ -27,20 +28,19 @@ def get_addon_list(wow_path):
 
 
 def remove_unused_sv_files(path, addons):
-    re_sv_filename = re.compile(r"^(.*)\.lua$")
+	re_sv_filename = re.compile(r"^(.*)\.lua$")
 
-    for sv_file in listfiles(path):
-        match = re_sv_filename.match(sv_file)
+	for sv_file in listfiles(path):
+		match = re_sv_filename.match(sv_file)
 
-        if match:
-            addon_name = match.group(1)
+		if match:
+			addon_name = match.group(1)
 
-            if addon_name not in addons:
+			if addon_name not in addons:
 
-                if os.path.exists(path):
-                    print("Removing " + os.path.join(path, sv_file))
-                    os.remove(os.path.join(path, sv_file))
-
+				if os.path.exists(path):
+					print("Removing " + os.path.join(path, sv_file))
+					os.remove(os.path.join(path, sv_file))
 
 def remove_unused_sv_bak_files(path, addons):
     re_sv_filename = re.compile(r"^(.*)\.bak$")
@@ -68,9 +68,8 @@ def clean_saved_variables(wow_path):
         account_path = os.path.join(sv_base_path, account)
         # /_retail_/WTF/Account/<account name>/SavedVariables
         account_sv_path = os.path.join(account_path, "SavedVariables")
-
         remove_unused_sv_files(account_sv_path, addons)
-        remove_unused_sv_bak_files(account_sv_path, addons)
+        #remove_unused_sv_bak_files(account_sv_path, addons)
 
         for server in [f for f in listdirs(account_path) if f != "SavedVariables"]:
             server_path = os.path.join(account_path, server)
@@ -81,7 +80,7 @@ def clean_saved_variables(wow_path):
 
                 if os.path.isdir(character_sv_path):
                     remove_unused_sv_files(character_sv_path, addons)
-                    remove_unused_sv_bak_files(character_sv_path, addons)
+        #            remove_unused_sv_bak_files(character_sv_path, addons)
 
 
 # this is what gets run if this file is executed from the command line
