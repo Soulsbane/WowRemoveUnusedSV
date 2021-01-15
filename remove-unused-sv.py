@@ -7,10 +7,7 @@ import os
 import re
 
 if os.name == "posix":
-    # OS X
     WOW_PATH = "/run/media/soulsbane/Games/Games/WoW/World of Warcraft/_retail_"
-    #WOW_PATH = "/home/soulsbane/bin/WoW/World of Warcraft/_retail_"
-    # WOW_PATH = "/home/soulsbane/.wine/drive_c/Program Files (x86)/World of Warcraft Beta"
 elif (os.name == "win") or (os.name == "nt"):
     WOW_PATH = r"E:\World of Warcraft\\"
 
