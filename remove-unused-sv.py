@@ -24,7 +24,7 @@ def get_addon_list(wow_path):
     return listdirs(os.path.join(wow_path, "Interface", "AddOns"))
 
 
-def remove_unused_sv_files(path, addons, extension):
+def remove_unused_files(path, addons, extension):
     re_sv_filename = re.compile(r"^(.*)\." + extension + "$")
 
     for sv_file in listfiles(path):
@@ -47,8 +47,8 @@ def clean_saved_variables(wow_path):
         account_path = os.path.join(sv_base_path, account)
         # /_retail_/WTF/Account/<account name>/SavedVariables
         account_sv_path = os.path.join(account_path, "SavedVariables")
-        remove_unused_sv_files(account_sv_path, addons, "lua")
-        remove_unused_sv_files(account_sv_path, addons, "bak")
+        remove_unused_files(account_sv_path, addons, "lua")
+        remove_unused_files(account_sv_path, addons, "bak")
 
         for server in [f for f in listdirs(account_path) if f != "SavedVariables"]:
             server_path = os.path.join(account_path, server)
@@ -58,11 +58,9 @@ def clean_saved_variables(wow_path):
                 character_sv_path = os.path.join(character_path, "SavedVariables")
 
                 if os.path.isdir(character_sv_path):
-                    remove_unused_sv_files(character_sv_path, addons, "lua")
-                    remove_unused_sv_files(character_sv_path, addons, "bak")
+                    remove_unused_files(character_sv_path, addons, "lua")
+                    remove_unused_files(character_sv_path, addons, "bak")
 
-
-# this is what gets run if this file is executed from the command line
 def main(argv=None):
     wow_path = WOW_PATH
     if len(argv) == 2:
