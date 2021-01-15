@@ -63,6 +63,7 @@ def clean_saved_variables(wow_path):
 
 def main(argv=None):
     wow_path = WOW_PATH
+
     if len(argv) == 2:
         wow_path = argv[1]
 
@@ -70,9 +71,7 @@ def main(argv=None):
         print("Error: WoW directory not found!")
         return -1
 
-    print("WoW Directory: " + wow_path)
     clean_saved_variables(wow_path)
-
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv))
