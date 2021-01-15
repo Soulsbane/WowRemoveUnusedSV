@@ -25,19 +25,19 @@ def get_addon_list(wow_path):
 
 
 def remove_unused_sv_files(path, addons):
-	re_sv_filename = re.compile(r"^(.*)\.lua$")
+    re_sv_filename = re.compile(r"^(.*)\.lua$")
 
-	for sv_file in listfiles(path):
-		match = re_sv_filename.match(sv_file)
+    for sv_file in listfiles(path):
+        match = re_sv_filename.match(sv_file)
 
-		if match:
-			addon_name = match.group(1)
+        if match:
+            addon_name = match.group(1)
 
-			if addon_name not in addons:
+            if addon_name not in addons:
 
-				if os.path.exists(path):
-					print("Removing " + os.path.join(path, sv_file))
-					os.remove(os.path.join(path, sv_file))
+                if os.path.exists(path):
+                    print("Removing " + os.path.join(path, sv_file))
+                    os.remove(os.path.join(path, sv_file))
 
 def remove_unused_sv_bak_files(path, addons):
     re_sv_filename = re.compile(r"^(.*)\.bak$")
